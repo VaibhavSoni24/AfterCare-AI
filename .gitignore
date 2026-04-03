@@ -20,6 +20,7 @@ firebase-service-account.json
 *.json
 !package.json
 !package-lock.json
+!firebase.json
 !firebase/firebase.json
 !firebase/firestore.indexes.json
 

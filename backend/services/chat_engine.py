@@ -63,7 +63,7 @@ Rules you MUST follow at all times:
         self.summary = summary
         self._api_key = api_key
         genai.configure(api_key=api_key)
-        self._model = genai.GenerativeModel("gemini-1.5-flash")
+        self._model = genai.GenerativeModel("gemini-2.5-flash")
         self._system_prompt = self._build_system_prompt()
 
     def _build_system_prompt(self) -> str:

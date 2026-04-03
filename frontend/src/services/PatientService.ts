@@ -3,10 +3,11 @@
  */
 import axios, { AxiosInstance, InternalAxiosRequestConfig } from 'axios';
 import AuthService from './AuthService';
+import { Patient } from '../types/models';
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000';
 
-const apiClient: AxiosInstance = axios.create({
+export const apiClient: AxiosInstance = axios.create({
   baseURL: API_BASE_URL,
   timeout: 30000,
   headers: { 'Content-Type': 'application/json' },
@@ -21,13 +22,9 @@ apiClient.interceptors.request.use(async (config: InternalAxiosRequestConfig) =>
   return config;
 });
 
-export default apiClient;
-
 /**
  * PatientService — API client for patient data operations.
  */
-import { Patient, SymptomLog } from '../types/models';
-
 class PatientService {
   private static instance: PatientService;
 

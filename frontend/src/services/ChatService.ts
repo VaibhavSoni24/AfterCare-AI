@@ -2,7 +2,7 @@
  * ChatService — AI Chat API client singleton.
  */
 import { ChatMessage } from '../types/models';
-import apiClient from './PatientService';
+import { apiClient } from './PatientService';
 
 class ChatService {
   private static instance: ChatService;

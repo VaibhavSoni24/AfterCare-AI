@@ -16,11 +16,16 @@ const App: React.FC = () => {
   const [authLoading, setAuthLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = AuthService.onAuthStateChanged((firebaseUser) => {
-      setUser(firebaseUser);
+    try {
+      const unsubscribe = AuthService.onAuthStateChanged((firebaseUser) => {
+        setUser(firebaseUser);
+        setAuthLoading(false);
+      });
+      return unsubscribe;
+    } catch (err) {
+      console.warn('Firebase auth initialization failed (placeholder credentials?):', err);
       setAuthLoading(false);
-    });
-    return unsubscribe;
+    }
   }, []);
 
   if (authLoading) {

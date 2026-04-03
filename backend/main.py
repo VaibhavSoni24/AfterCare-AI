@@ -11,6 +11,7 @@ import os
 from contextlib import asynccontextmanager
 
 import firebase_admin
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from firebase_admin import credentials, firestore
@@ -30,6 +31,10 @@ logging.basicConfig(
     format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
 )
 logger = logging.getLogger("aftercare_ai")
+
+# Load local environment variables for development.
+# In Cloud Run, runtime env vars are provided by the platform.
+load_dotenv()
 
 
 # ──────────────────────────── Lifespan ────────────────────────────────────

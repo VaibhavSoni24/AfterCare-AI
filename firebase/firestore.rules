@@ -1,0 +1,29 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ── Patient documents ──────────────────────────────────────────────
+    // Each patient document is keyed by Firebase Auth UID.
+    // Users can ONLY read/write their own document.
+    match /patients/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // ── Public health information (read-only reference data) ───────────
+    match /public/{document=**} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+
+    // ── Admin collection (server-side only via Admin SDK) ──────────────
+    match /admin/{document=**} {
+      allow read, write: if false;
+    }
+
+    // ── Deny everything else ────────────────────────────────────────────
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
